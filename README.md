@@ -5,7 +5,7 @@ I used Logistic Regression algorithm to build the machine learning model and dep
 
 
 Prerequisites
-You must have pycaret and Pandas (for Machine Leraning Model) installed on jupyter notebook and Flask (for API) installed.
+You must have pycaret and Pandas (for Machine Learning Model) installed on jupyter notebook and Flask (for API) installed.
 
 Project Structure
 This project has five major parts :
