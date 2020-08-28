@@ -16,7 +16,7 @@ PREPROCESSING-New.ipynb - This contains the jupyter notebook from which the mode
 app.py - This contains Flask APIs that receives clients details through GUI or API calls, computes the precited value based on our model and returns it.
 
 
-templates - This folder contains the HTML template to allow user to enter clents details and displays  customers eligibility for a loan.
+templates - This folder contains the HTML template to allow user to enter their details and display customers eligibility for a loan.
 
 
 static - This folder contains the style.css template to give a presentable user interface.
