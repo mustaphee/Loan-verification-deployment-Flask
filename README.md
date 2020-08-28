@@ -11,8 +11,17 @@ Project Structure
 This project has five major parts :
 
 PREPROCESSING-New.ipynb - This contains the jupyter notebook from which the model(final_modell.pki) was created to predict if a client would default or not based on training data in ('test.xlsx') file.
+
+
 app.py - This contains Flask APIs that receives clients details through GUI or API calls, computes the precited value based on our model and returns it.
+
+
 templates - This folder contains the HTML template to allow user to enter clents details and displays  customers eligibility for a loan.
+
+
 static - This folder contains the style.css template to give a presentable user interface.
+
 request.py - This uses requests module to call APIs already defined in app.py and displays the returned value.
+
+
 Running the project
