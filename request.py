@@ -1,9 +1,8 @@
 import requests
 
-url = 'http://localhost:5001/predict_api'
+url = 'http://localhost:5009/predict_api'
 r = requests.post(url,json={'Age':23, 'No_of_Dependents':2, 'Available_balance':100000, 'Ledger_balance':20000,
-       'Gender':1, 'Occupation':2, 'Location':1, 'Marital_Status':2,
-       'Employment_Status':1, 'Education_Status':1, 'Houseownership':1,
-       'CarOwnership':1, 'Income':1, 'Coapplicant_Income':1, 'Credit_score':1})
+       'Gender':F, 'Occupation':Business,  'Marital_Status':Married,
+       'Employment_Status':Employed, 'Education_Status':Graduate, 'Income':50000, 'Credit_score':500 , 'Loan_Amount':400000})
 
 print(r.json())
