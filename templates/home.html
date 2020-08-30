@@ -1,169 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-    
-    <meta charset="utf-8">
+  <meta charset="UTF-8">
+   <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="static/style.css">  
     <title>loan app</title>
-    
 </head>
 
 <body>
-    
-    <div class="container main">
+ <div class="container main">
   <div class="jumbotron" id="holder">
      <br>
        <centre><b><h2 style="color:#FF0000";>{{ prediction_text}}</h2></b></centre> 
      <br>
      <br>
-    <centre><h1 class='main_heading'> Loan Verification</h1></centre>
-    <p>This Web application is a machine learning model which predicts if you are applicable for a loan.</p>
-    <br>
+    <centre><h1 class='main_heading'> Loan Approval Verification</h1></centre>
+    <p>This Web application is a machine learning model which predicts if you are eligible for a loan.</p>
+      
+  
+   <br>
     <div class="instructions">
       <h2>Instructions: </h2>
       <p>1. Please Enter values for the following fields</p>
       <p>2. click predict  [NOTE: 0 means Not approved while 1 means Approved]</p>
     </div>
-
-    
+ &nbsp; &nbsp;  
 
      <!-- Form to enter new data for predictions  -->
-    <form class = 'horizontal' action="{{ url_for('predict')}}"method="POST">
+    <form action="{{ url_for('predict')}}"method="POST">
+        <input type="text" name="Age" placeholder="Age" required="required" /><br>
+        <input type="text" name="No_of_Dependents" placeholder="No_of_Dependents" required="required" /><br>
+        <input type="text" name="Available_balance" placeholder="Available_balance" required="required" /><br>
+        <input type="text" name="Ledger_balance" placeholder="Ledger_balance" required="required" /><br>
+        <input type="text" name="Income" placeholder="Income" required="required" /><br>
+        <input type="text" name="Credit_score" placeholder="Credit_score" required="required" /><br>
+        <input type="text" name="Loan_Amount" placeholder="Loan_Amount" required="required" /><br>
+        <input type="text" name="Gender" placeholder="Gender" required="required" /><br>
+        <input type="text" name="Occupation" placeholder="Occupation" required="required" /><br>
+        <input type="text" name="Marital_Status" placeholder="Marital_Status" required="required" /><br>
+        <input type="text" name="Employment_Status" placeholder="Employment_Status" required="required" /><br>
+        <input type="text" name="Education_Status" placeholder="Education_Status" required="required" /><br>
 
-      <div class="form-group">
-        <div class="col-sm-10">
-          <input  class="form-control" type= "text" name="No_of_Dependents   " placeholder="No_of_Dependents   " required="required" />
-        </div>
-      </div>
-     
-      <div class="form-group">
-        <div class="col-sm-10">
-          <input  class="form-control" type="text" name="Age" placeholder="Age" required="required" />
-        </div>
-      </div>
 
-      <div class="form-group">
-        <div class="col-sm-10">
-          <input  class="form-control" type="text" name="Available_balance  " placeholder="Available_balance  " required="required" />
-        </div>
-      </div>
-        
-      <div class="form-group">
-        <div class="col-sm-10">
-          <input  class="form-control" type="text" name="Ledger_balance" placeholder="Ledger_balance" required="required" />
-        </div>
-      </div>
-        
-         <div class="form-group">
-        <div class="col-sm-10">
-          <input  class="form-control" type="text" name="Credit_score" placeholder="Credit_score" required="required" />
-        </div>
-      </div>
-
-        <div class="form-group">
-        <div class="col-sm-10">
-          <input  class="form-control" type="text" name="Coapplicant_Income  " placeholder="Coapplicant_Income  " required="required" />
-        </div>
-      </div>
-        
-        <div class="form-group">
-        <div class="col-sm-10">
-          <input  class="form-control" type="text" name="Income" placeholder="Income" required="required" />
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-10">
-          <select class="form-control" type="number"  name="Gender" required="required">
-                <option value="0">Gender:</option>
-                <option value="1">Male</option>
-                <option value="0">Female</option>
-          </select>
-        </div>
-      </div>
-        <div class="form-group">
-        <div class="col-sm-10">
-          <select class="form-control" type="number"  name="Marital_Status" required="required">
-                <option value="0">Marital_Status:</option>
-                <option value="3">Married</option>
-                <option value="2">Single</option>
-                <option value="1">Divorced</option>
-                <option value="0">Widow</option>
-          </select>
-        </div>
-      </div>
-        <div class="form-group">
-        <div class="col-sm-10">
-          <select class="form-control" type="number"  name="Employment_Status" required="required">
-                <option value="0">Employment_Status:</option>
-                <option value="3">Employer</option>
-                <option value="2">Worker</option>
-                <option value="1">Self Employed</option>
-                <option value="0">Unemployed</option>
-          </select>
-        </div>
-      </div>
-        <div class="form-group">
-        <div class="col-sm-10">
-          <select class="form-control" type="number"  name="Education_Status" required="required">
-                <option value="0">Education_Status:</option>
-                <option value="2">Bachelor or above</option>
-                 <option value="1">Senior High school</option>
-                 <option value="0">Junior school or below</option>
-          </select>
-        </div>
-      </div>
-        <div class="form-group">
-        <div class="col-sm-10">
-          <select class="form-control" type="number"  name="Houseownership" required="required">
-                <option value="0">Houseownership:</option>
-                <option value="2">Own</option>
-                <option value="1">Rented</option>
-                <option value="0">Parents House</option>
-          </select>
-        </div>
-      </div>
-        <div class="form-group">
-        <div class="col-sm-10">
-          <select class="form-control" type="number"  name="Location" required="required">
-                <option value="0">Location:</option>
-                <option value="2">Urban</option>
-                <option value="1">SemiUrban</option>
-                <option value="0">Rural</option>
-          </select>
-        </div>
-      </div>
-        <div class="form-group">
-        <div class="col-sm-10">
-          <select class="form-control" type="number"  name="CarOwnership" required="required">
-                <option value="0">CarOwnership:</option>
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-          </select>
-        </div>
-      </div>
-        <div class="form-group">
-        <div class="col-sm-10">
-          <select class="form-control" type="number"  name="Occupation" required="required">
-                <option value="0">Occupation:</option>
-                <option value="2">Business</option>
-                <option value="1">Profession</option>
-                <option value="0">Employment</option>
-          </select>
-        </div>
-      </div>
-        
         <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
-
+        <a href="/" class="btn btn-primary">Back to main page</a>
     </form>
 
    <br>
    <br>
-      </div>
-
+  
+   </div>
+ </div>
+ 
 
 </body>
 </html>
