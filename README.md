@@ -1,7 +1,7 @@
 # Loan-verification-deployment-Flask
 The organization wishes to automatically monitor the eligibility of a loan on the basis of client information given when filling out an electronic application form. These are gender, marital status , employment status, number of dependents, income, credit score etc.  To automate this process, they have given a solution to identify the customers segments so that they can directly target these customers to simplify this process..
 
-I used Logistic Regression algorithm to build the machine learning model and deployed it using flask and Heroku
+I used K Neighbors Classifier algorithm to build the machine learning model and deployed it using flask and Heroku
 
 
 Prerequisites
