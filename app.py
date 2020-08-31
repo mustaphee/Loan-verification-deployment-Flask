@@ -24,7 +24,10 @@ def predict():
     data_unseen = pd.DataFrame([final], columns = cols)
     prediction = predict_model(model, data=data_unseen)
     prediction = int(prediction.Label[0])
-    return render_template('home.html',prediction_text='The output is {}'.format(prediction))
+    loan = ' Approved ' if prediction == True else ' Rejected '
+    return render_template('home.html',prediction_text='Loan status {}'.format(loan))
+
+    
 
 @app.route('/predict_api',methods=['POST'])
 
