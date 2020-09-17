@@ -7,9 +7,11 @@ import jinja2
 
 app = Flask(__name__)
 
-model = load_model('Final_model3')
-cols = ['Age', 'No_of_Dependents','Available_balance','Ledger_balance', 'Income','Credit_score','Loan_Amount','Gender','Occupation',
-       'Marital_Status', 'Employment_Status','Education_Status']
+model = load_model('Final_modelr')
+cols = ['Salary', 'Total_Debit', 'Loan_Amount', 'Industry',
+       'Years_employed', 'Job_position', 'Property', 'HR_confirmation',
+       'No_of_dependents']
+
 
 
 @app.route('/')
@@ -24,10 +26,8 @@ def predict():
     data_unseen = pd.DataFrame([final], columns = cols)
     prediction = predict_model(model, data=data_unseen)
     prediction = int(prediction.Label[0])
-    loan = ' Approved ' if prediction == True else ' Rejected '
-    return render_template('home.html',prediction_text='Loan status {}'.format(loan))
-
-    
+    #loan = ' Approved ' if prediction == True else ' Rejected '
+    return render_template('home.html',prediction_text='Loan Percentage is {}'.format(prediction))
 
 @app.route('/predict_api',methods=['POST'])
 
