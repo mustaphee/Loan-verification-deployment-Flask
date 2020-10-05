@@ -1,5 +1,5 @@
 from flask import Flask,request, url_for, redirect, render_template, jsonify
-from pycaret.classification import load_model, predict_model
+from pycaret.regression import load_model, predict_model
 import pandas as pd
 import pickle
 import numpy as np
