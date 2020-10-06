@@ -7,7 +7,7 @@ import jinja2
 
 app = Flask(__name__)
 
-model = load_model('Final_modelr')
+model = load_model('Final_modelx')
 cols = ['Salary', 'Total_Debit', 'Loan_Amount', 'Industry',
        'Years_employed', 'Job_position', 'Property', 'HR_confirmation',
        'No_of_dependents']
