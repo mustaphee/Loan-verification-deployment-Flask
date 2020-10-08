@@ -1,13 +1,16 @@
 from typing import Optional
+import os
 
-from fastapi import FastAPI
+from fastapi import FastAPI, File, UploadFile, Form
 from pydantic import BaseModel, validator, Field
 from fastapi import FastAPI, Request, status
 from fastapi.encoders import jsonable_encoder
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, HTMLResponse
 from . import model
 
+
+PASSWORD = '322e3df8cuvjvrjgdhxccecqwefctcgfsadfwe34gvr'
 
 app = FastAPI(
     title="Touchcore: Loan Score Prediction Engine",
@@ -120,3 +123,38 @@ def predict_loan_score(data: PredictionSchema):
     response = {"prediction_score": float(
         prediction.Label[0]), "raw_output": prediction.to_dict('records')[0]}
     return {'status': 'success', 'data': response, 'message': 'Prediction successful'}
+
+
+@app.get("/upload")
+async def upload_model():
+    content = """
+        <body>
+            <form action="/files/" enctype="multipart/form-data" method="post">
+                <label for"passwordField">Password</label>
+                <input id="passwordField" name="password" type="text">
+                <input id="fileField" name="file" type="file">
+            <input type="submit">
+            </form>
+        </body>
+    """
+    return HTMLResponse(content=content)
+
+
+@app.post("/files/")
+async def setup_model_files(password: str = Form(...), file: UploadFile = File(...)):
+    if password != PASSWORD:
+        return {'status': 'fail', 'error': {'msg': 'AUTH_FAILED'}, 'message': 'Incorrect Password'}
+
+    if file.filename.endswith('.pkl') is not True and file.content_type != 'application/octet-stream':
+        return {'status': 'fail', 'error': {'msg': 'INVALID_FILE'}, 'message': 'You can only upload a valid pickle model'}
+
+    content = await file.read()
+
+    with open('trained_model.pkl', 'wb') as newmodel:
+        newmodel.write(content)
+
+    return {'status': 'success', 'data': {'file_size': str(file.spool_max_size/10000)+'mb',
+                                          'file_name': file.filename}, 'message': 'Model uploaded successfully'}
+
+    # TODO: Kill this current process with SIGINT and allow pm2 or the process manager to restart it and reload the new model
+    # TODO: Or create the import model as a singleton object and reload it when a new model is uploaded
