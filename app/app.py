@@ -22,13 +22,13 @@ class PredictionSchema(BaseModel):
         0, ge=0, le=1500000, description='`total_debit` can only be between 0 and 1500000')
     loan_amount: float = Field(..., ge=500, le=2000000,
                                description='`loan_amount` can only be between 500 and 2000000')
-
+    industry: str = Field(..., description='Allowed values are A..to..E')
     years_employed: int = Field(..., ge=0,
                                 description='`year_employed` cannot be negative')
     job_position: str = Field(
         ..., description="Allowed value are 'Senior', 'Midlevel', 'Junior', 'Intern'")
     property: str = Field(..., description='Allowed values are M..to..P')
-    industry: str = Field(..., description='Allowed values are A..to..E')
+
     hr_confirmation: bool = Field(..., description='true or false')
     no_of_dependents: int = Field(..., ge=0, lt=6,
                                   description='`no_of_dependents` can only be between 0 and 5')
@@ -62,27 +62,16 @@ class PredictionSchema(BaseModel):
         description: 'Predicts loan score from input data'
         schema_extra = {
             "example": {
-                "salary": 10000,
-                "total_debit": 0,
-                "loan_amount": 10000,
-                "years_employed": 0,
-                "job_position": "Intern",
-                "property": "M",
+                "salary": 1000000,
+                "total_debit": 1000000,
+                "loan_amount": 50000,
                 "industry": "A",
+                "years_employed": 5,
+                "job_position": "Senior",
+                "property": "M",
                 "hr_confirmation": True,
                 "no_of_dependents": 0
             },
-            "response": {
-                "salary": 10000,
-                "total_debit": 0,
-                "loan_amount": 10000,
-                "years_employed": 0,
-                "job_position": "Intern",
-                "property": "M",
-                "industry": "A",
-                "hr_confirmation": True,
-                "no_of_dependents": 0
-            }
         }
 
 
@@ -122,7 +111,7 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 
 @ app.get('/', response_model=BaseResponseSchema)
 def home():
-    return {'status': 'succsess', 'message': 'Welcome Home'}
+    return {'status': 'success', 'message': 'Welcome Home', 'data': {}}
 
 
 @ app.post('/api/v1/predict', response_model=PredictionResponseSchema)
